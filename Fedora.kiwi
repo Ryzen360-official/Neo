@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<image schemaversion="8.0" name="Neo">
+	<description type="system">
+	<author>Native</author>
+<contact>yashyt6246@gmail.com</contact>
+<specification>Neo Linux</specification>
+</description>
+
+<preferences>
+	<version>44</version>
+<packagemanager>dnf5</packagemanager>
+<locale>en_US</locale>
+<keytable>us</keytable>
+<timezone>UTC</timezone>
+<release-version>44</release-version>
+<type image="iso"
+	  publisher="Native"
+	  volid="Neo_Linux"
+	  application_id="Neo_Linux"
+	  firmware="uefi"
+	  filesystem="squashfs"
+	  flags="overlay"
+	  mediacheck="true"
+	  efiparttable="gpt"
+	  kernelcmdline="quiet splash rd.live.image rd.live.dir=LiveOS"
+	  efifatimagesize="31">
+
+	<bootloader name="grub2" timeout="10"/>
+</type>
+</preferences>
+
+
+<!-- Repositories -->
+<include from="this://./repositories/core_repos.xml"/>
+
+<!-- Packages -->
+<packages type="bootstrap">
+	<package name="filesystem"/>
+</packages>
+	<packages type="image">
+		<ignore name="kfind"/>
+		<ignore name="kcharselect"/>
+		<ignore name="kdebugsettings"/>
+		<ignore name="plasma-desktop-doc"/>
+		<ignore name="plasma-vault"/>
+		<ignore name="signon-kwallet-extension"/>
+		<ignore name="mesa-va-drivers-freeworld"/>
+		<ignore name="mesa-vdpau-drivers-freeworld"/>
+		<namedCollection name="critical-path-kde"/>
+		<namedCollection name="anaconda-tools"/>
+		<namedCollection name="libreoffice"/>
+<!--	<package name="mesa-libEGL"/> doing this to make sure if the libs are not installed i can uncomment this
+		<package name="dnf5"/>
+		<package name="mesa-libGL"/>
+		<package name="mesa-libgbm"/>
+		<package name="kernel-cachyos" bootinclude="true"/>
+		<package name="kernel-cachyos-core" bootinclude="true"/>
+		<package name="kernel-cachyos-modules" bootinclude="true"/>
+		<package name="dmemcg-booster"/>
+		<package name="plasma-foreground-booster"/>
+		<package name="systemd-boot"/> -->
+		<package name="anaconda-install-env-deps"/>
+		<package name="anaconda-live"/>
+		<package name="ark"/>
+
+		<package name="bash"/>
+		<package name="bottles"/>
+		<package name="brave-browser"/>
+		<package name="btop"/>
+		<package name="btrfs-progs"/>
+
+		<package name="coreutils"/>
+
+		<package name="dolphin"/>
+		<package name="dracut"/>
+		<package name="dracut-config-generic"/>
+		<package name="dracut-kiwi-live"/>
+		<package name="dracut-live"/>
+
+		<package name="ffmpeg"/>
+		<package name="fuse"/>
+
+		<package name="gamemode"/>
+		<package name="gamescope"/>
+		<package name="gimp"/>
+		<package name="git"/>
+		<package name="docker"/>
+		<package name="grub2-efi-x64"/>
+		<package name="grub2-efi-x64-modules"/>
+		<package name="grub2-tools"/>
+		<package name="grub2-tools-minimal"/>
+		<package name="gstreamer1-libav"/>
+		<package name="gstreamer1-plugins-bad-freeworld"/>
+		<package name="gstreamer1-plugins-ugly"/>
+
+		<package name="intel-media-driver"/>
+		<package name="iproute"/>
+		<package name="iputils"/>
+		<package name="isomd5sum"/>
+
+		<package name="kernel"/>
+		<package name="konsole"/>
+		<package name="kernel-core"/>
+		<package name="kernel-modules"/>
+		<package name="kernel-modules-extra"/>
+		<package name="kdenlive"/>
+
+		<package name="libva-utils"/>
+		<package name="linux-firmware"/>
+		<package name="livesys-scripts"/>
+
+		<package name="mangohud"/>
+		<package name="mesa-dri-drivers"/>
+		<package name="mesa-dri-drivers.i686"/>
+		<package name="mesa-va-drivers"/>
+		<package name="mesa-vulkan-drivers"/>
+		<package name="mesa-vulkan-drivers.i686"/>
+
+		<package name="nano"/>
+		<package name="neovim"/>
+		<package name="NetworkManager"/>
+
+		<package name="obs-studio"/>
+
+		<package name="pdfarranger"/>
+		<package name="pipewire-codec-aptx"/>
+
+		<package name="qbittorrent"/>
+
+		<package name="shim-x64"/>
+		<package name="steam"/>
+		<package name="systemd"/>
+
+		<package name="udisks2-btrfs"/>
+
+		<package name="vlc"/>
+		<package name="vulkan-tools"/>
+
+		<package name="wine"/>
+
+		</packages>
+</image>
