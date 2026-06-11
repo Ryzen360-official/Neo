@@ -1,0 +1,19 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "yashyt6246@gmail.com",
+                "Name": "Native"
+            }
+        ],
+        "Category": "",
+        "Description": "Neo - Breeze Dark",
+        "EnabledByDefault": true,
+        "Id": "",
+        "License": "GPLv2+",
+        "Name": "Neo-Dark",
+        "Version": "0.01",
+        "Website": ""
+    },
+    "X-Plasma-API": "6.0"
+}

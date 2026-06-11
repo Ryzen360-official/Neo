@@ -1,0 +1,12 @@
+[General]
+Name=Neo
+desktopLayout=org.neo.layout.js
+
+[KDE]
+LookAndFeelPackage=org.neo.theme
+
+[PlasmaViews][Panel 1]
+theme=Neo
+
+[Wallpaper]
+Image=/usr/share/wallpapers/neo-1.jpg

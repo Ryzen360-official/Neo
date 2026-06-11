@@ -1,0 +1,46 @@
+# Neo Plymouth script (placeholder — replace with custom assets)
+Window.SetBackgroundTopColor(0.10, 0.10, 0.18);
+Window.SetBackgroundBottomColor(0.09, 0.13, 0.24);
+
+logo.image = Image("logo.png");
+logo.sprite = Sprite(logo.image);
+logo.sprite.SetX(Window.GetWidth() / 2 - logo.image.GetWidth() / 2);
+logo.sprite.SetY(Window.GetHeight() / 2 - logo.image.GetHeight() / 2);
+logo.sprite.SetOpacity(1);
+
+fun refresh_callback ()
+{
+    logo.sprite.SetOpacity(1);
+}
+
+Plymouth.SetRefreshFunction(refresh_callback);
+
+fun message_callback (text)
+{
+    my_image = Image.Text(text);
+    my_sprite = Sprite(my_image);
+    my_sprite.SetPosition(10, 10, 10000);
+}
+
+Plymouth.SetMessageFunction(message_callback);
+
+fun display_normal_callback ()
+{
+    logo.sprite.SetOpacity(1);
+}
+
+Plymouth.SetDisplayNormalFunction(display_normal_callback);
+
+fun display_password_callback (prompt, bullets)
+{
+    logo.sprite.SetOpacity(0.5);
+}
+
+Plymouth.SetDisplayPasswordFunction(display_password_callback);
+
+fun quit_callback ()
+{
+    logo.sprite.SetOpacity(0);
+}
+
+Plymouth.SetQuitFunction(quit_callback);
