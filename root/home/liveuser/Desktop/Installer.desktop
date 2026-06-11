@@ -1,0 +1,7 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Type=Application
+Exec=sudo calamares
+Hidden=false
+NoDisplay=false
+Name=Calamares Installer
