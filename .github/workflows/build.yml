@@ -1,0 +1,36 @@
+name: Build Fedora ISO (Fedora Native)
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build-iso:
+    runs-on: ubuntu-latest
+    container:
+      image: fedora:latest
+      options: --privileged # Required so KIWI can mount loops and chroots safely
+
+    steps:
+    # 1. Pull down your repository code
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    # 2. Install KIWI directly using Fedora's native package manager
+    - name: Install KIWI-NG
+      run: dnf install -y kiwi-cli qemu-img kpartx btrfs-progs
+
+    # 3. Let KIWI bake the ISO directly into the repository root directory
+    - name: Run KIWI-NG Build
+      run: |
+      kiwi-ng --kiwi-file ./Fedora.kiwi --shared-cache-dir ./cache --debug system build   --description ./   --target-dir ./out
+      
+
+    # 4. Save the finished ISO from the root directory to your GitHub Action panel
+    - name: Upload Completed ISO
+      uses: actions/upload-artifact@v4
+      with:
+        name: Neo-iso
+        path: ./*.iso
+        retention-days: 10
