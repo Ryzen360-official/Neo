@@ -23,8 +23,7 @@ jobs:
 
     # 3. Let KIWI bake the ISO directly into the repository root directory
     - name: Run KIWI-NG Build
-      run: |
-      kiwi-ng --kiwi-file ./Fedora.kiwi --shared-cache-dir ./cache --debug system build   --description ./   --target-dir ./out
+      run: kiwi-ng --kiwi-file ./Fedora.kiwi --shared-cache-dir ./cache --debug system build   --description ./   --target-dir ./out
       
 
     # 4. Save the finished ISO from the root directory to your GitHub Action panel
