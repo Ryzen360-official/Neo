@@ -19,7 +19,7 @@ jobs:
 
     # 2. Install KIWI directly using Fedora's native package manager
     - name: Install KIWI-NG
-      run: dnf install -y kiwi-cli qemu-img kpartx btrfs-progs implantisomd5 mkfs.fat squashfs-tools
+      run: dnf install -y kiwi-cli qemu-img kpartx btrfs-progs implantisomd5 mkfs.fat squashfs-tools xorriso
 
     # 3. Let KIWI bake the ISO directly into the repository root directory
     - name: Run KIWI-NG Build
