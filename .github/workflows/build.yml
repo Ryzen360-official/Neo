@@ -31,5 +31,5 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: Neo-iso
-        path: ./*.iso
+        path: ./out/*.iso
         retention-days: 10
