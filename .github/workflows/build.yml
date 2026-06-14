@@ -23,7 +23,7 @@ jobs:
 
     # 3. Let KIWI bake the ISO directly into the repository root directory
     - name: Run KIWI-NG Build
-      run: kiwi-ng --kiwi-file ./Fedora.kiwi --shared-cache-dir ./cache --profile=Hyper-Nova --debug system build   --description ./   --target-dir ./out && kiwi-ng --kiwi-file ./Fedora.kiwi --shared-cache-dir ./cache --profile=Game-Nova --debug system build   --description ./   --target-dir ./out && kiwi-ng --kiwi-file ./Fedora.kiwi --shared-cache-dir ./cache --profile=Dev-Nova --debug system build   --description ./   --target-dir ./out && kiwi-ng --kiwi-file ./Fedora.kiwi --shared-cache-dir ./cache --profile=Core --debug system build   --description ./   --target-dir ./out
+      run: rm -rf ./out && kiwi-ng --kiwi-file ./Fedora.kiwi --shared-cache-dir ./cache --profile=Hyper-Nova --debug system build   --description ./   --target-dir ./out && kiwi-ng --kiwi-file ./Fedora.kiwi --shared-cache-dir ./cache --profile=Game-Nova --debug system build   --description ./   --target-dir ./out && kiwi-ng --kiwi-file ./Fedora.kiwi --shared-cache-dir ./cache --profile=Dev-Nova --debug system build   --description ./   --target-dir ./out && kiwi-ng --kiwi-file ./Fedora.kiwi --shared-cache-dir ./cache --profile=Core --debug system build   --description ./   --target-dir ./out
 
     # 4. Save the finished ISO from the root directory to your GitHub Action panel
     - name: Upload Completed ISO
