@@ -5,7 +5,6 @@
 <contact>yashyt6246@gmail.com</contact>
 <specification>Neo Linux</specification>
 </description>
-
 <preferences>
 	<version>44</version>
 <packagemanager>dnf5</packagemanager>
@@ -30,9 +29,14 @@
 	<rpm-excludedocs>true</rpm-excludedocs>
 <rpm-check-signatures>false</rpm-check-signatures>
 </preferences>
-
+<profiles>
+	<profile name="Core" description="The base packages required by everything and also works fully fine on its own!"/>
+	<profile name="Hyper-Nova" description="The full Neo experience with everything!"> <requires profile="Core"/> </profile>
+<profile name="Dev-Nova" description="The sole Neo devel experience with only development packages!"> <requires profile="Core"/> </profile>
+<profile name="Game-Nova" description="The sole Neo gamer experience with only gaming packages!"> <requires profile="Core"/> </profile>
+</profiles>
 <!-- Repositories -->
-<repository type="rpm-md" alias="Fedora" sourcetype="metalink">
+<repository type="rpm-md" alias="Neo" sourcetype="metalink">
 	<source path="https://mirrors.fedoraproject.org/metalink?repo=fedora-$releasever&amp;arch=$basearch">
 	<signing key="file:///usr/share/distribution-gpg-keys/fedora/RPM-GPG-KEY-fedora-$releasever-primary"/>
 	</source>
@@ -42,53 +46,46 @@
 	<signing key="file:///usr/share/distribution-gpg-keys/fedora/RPM-GPG-KEY-fedora-$releasever-primary"/>
 	</source>
 	</repository>
-	<repository type="rpm-md" alias="RPMfusion-free" priority="90">
-	<source path="https://download1.rpmfusion.org/free/fedora/releases/$releasever/Everything/$basearch/os/"/>
-</repository>
-
-<repository type="rpm-md" alias="RPMfusion-nonfree" priority="90">
-	<source path="https://download1.rpmfusion.org/nonfree/fedora/releases/$releasever/Everything/$basearch/os/"/>
+	<repository type="rpm-md" alias="Terra" priority="90" sourcetype="metalink">
+	<source path="https://tetsudou.fyralabs.com/metalink?repo=terra$releasever&amp;arch=$basearch"/>
 </repository>
 <repository type="rpm-md" alias="Brave" priority="90">
 	<source path="https://brave-browser-rpm-release.s3.brave.com/x86_64/">
 	<signing key="https://brave-browser-rpm-release.s3.brave.com/brave-core.asc"/>
 	</source>
 	</repository>
-	<repository type="rpm-md" alias="VS-code" priority="50">
+	<repository type="rpm-md" alias="Vscode" priority="50">
 	<source path="https://packages.microsoft.com/yumrepos/vscode/"/>
 </repository>
+<repository type="rpm-md" alias="RPMfusion-free" priority="90">
+	<source path="https://download1.rpmfusion.org/free/fedora/releases/$releasever/Everything/$basearch/os/"/>
+</repository>
 
+<repository type="rpm-md" alias="RPMfusion-nonfree" priority="90">
+	<source path="https://download1.rpmfusion.org/nonfree/fedora/releases/$releasever/Everything/$basearch/os/"/>
+</repository>
 <!-- Packages -->
 <packages type="bootstrap">
 	<package name="filesystem"/>
 	</packages>
 
-	<packages type="image">
-	<!-- Ignore Upstream Trademarks/Banners -->
+	<packages type="image" profiles="Core">
 	<ignore name="kfind"/>
 	<ignore name="kcharselect"/>
 	<ignore name="kdebugsettings"/>
 	<ignore name="plasma-desktop-doc"/>
 	<ignore name="plasma-vault"/>
 	<ignore name="signon-kwallet-extension"/>
+	<ignore name="fedora-logos"/>
 	<ignore name="mesa-va-drivers-freeworld"/>
-	<ignore name="mesa-vdpau-drivers-freeworld"/>
-	<ignore name="fedora-logos"/> <!-- Strip official branding -->
-
 	<namedCollection name="critical-path-kde"/>
-	<namedCollection name="libreoffice"/>
-	<namedCollection name="anaconda-tools"/>
-	<namedCollection name="development-tools"/>
-
-	<!-- Custom & Generic Layout Assets -->
-	<package name="generic-logos"/> <!-- Provide neutral alternatives -->
-
-	<package name="anaconda-live"/>
-	<package name="anaconda-install-env-deps"/>
+<!--	<namedCollection name="anaconda-tools"/>-->
+	<package name="generic-logos"/>
+<!--	<package name="anaconda-live"/>
+	<package name="anaconda-install-env-deps"/>-->
 	<package name="ark"/>
 	<package name="bash"/>
 	<package name="bluez"/>
-	<package name="bottles"/>
 	<package name="brave-browser"/>
 	<package name="btop"/>
 	<package name="btrfs-progs"/>
@@ -96,22 +93,18 @@
 	<package name="calamares"/>
 	<package name="dbus"/>
 	<package name="dbus-daemon"/>
+	<package name="dbus-broker"/>
 	<package name="dbus-tools"/>
 	<package name="dbus-x11"/>
 	<package name="dolphin"/>
 	<package name="dracut"/>
-<!-- 	<package name="dracut-kiwi-live"/> -->
 	<package name="dracut-config-generic"/>
 	<package name="dracut-live"/>
 	<package name="efibootmgr"/>
 	<package name="fastfetch"/>
 	<package name="ffmpeg"/>
+	<package name="filelight"/>
 	<package name="fuse"/>
-	<package name="gamemode"/>
-	<package name="gamescope"/>
-	<package name="gimp"/>
-	<package name="git"/>
-	<package name="docker"/>
 	<package name="glibc-common"/>
 	<package name="glibc-langpack-en"/>
 	<package name="grub2-efi-x64"/>
@@ -125,7 +118,7 @@
 	<package name="iproute"/>
 	<package name="iputils"/>
 	<package name="isomd5sum"/>
-	<package name="kdenlive"/>
+	<package name="kde-partitionmanager"/>
 	<package name="kernel"/>
 	<package name="kernel-core"/>
 	<package name="kernel-modules"/>
@@ -137,22 +130,34 @@
 	<package name="linux-firmware"/>
 	<package name="squashfs-tools"/>
 	<package name="livesys-scripts"/>
-	<package name="mangohud"/>
 	<package name="mesa-dri-drivers"/>
 	<package name="mesa-dri-drivers.i686"/>
 	<package name="mesa-va-drivers"/>
 	<package name="mesa-vulkan-drivers"/>
 	<package name="mesa-vulkan-drivers.i686"/>
 	<package name="nano"/>
-	<package name="neovim"/>
 	<package name="NetworkManager"/>
+	<package name="pipewire-codec-aptx"/>
+	<package name="qemu-guest-agent"/>
+	<package name="flatpak"/>
+	<package name="distrobox"/>
+	<package name="toolbox"/>
+	<package name="shim-x64"/>
+	<package name="systemd"/>
+	<package name="systemd-boot"/>
+	<package name="udisks2-btrfs"/>
+	<package name="virtualbox-guest-additions"/>
+	<package name="vulkan-tools"/>
+	</packages>
+
+
+	<packages type="image" profiles="Hyper-Nova">
+	<namedCollection name="development-tools"/>
+	<namedCollection name="libreoffice"/>
+	<package name="neovim"/>
+	<package name="gcc"/>
 	<package name="obs-studio"/>
 	<package name="pdfarranger"/>
-	<package name="pipewire-codec-aptx"/>
-	<package name="plymouth"/>
-	<package name="qbittorrent"/>
-	<package name="qemu-guest-agent"/>
-	<package name="gcc"/>
 	<package name="gcc-c++"/>
 	<package name="cmake"/>
 	<package name="make"/>
@@ -163,25 +168,72 @@
 	<package name="buildah"/>
 	<package name="skopeo"/>
 	<package name="python3-pip"/>
+	<package name="mangohud"/>
 	<package name="python3-devel"/>
 	<package name="nodejs"/>
 	<package name="npm"/>
 	<package name="rust"/>
 	<package name="cargo"/>
-	<package name="flatpak"/>
-	<package name="distrobox"/>
-	<package name="toolbox"/>
-	<package name="shim-x64"/>
 	<package name="steam"/>
-	<package name="systemd"/>
-	<package name="systemd-boot"/>
-	<package name="udisks2-btrfs"/>
-	<package name="vlc"/>
-	<package name="virtualbox-guest-additions"/>
 	<package name="code"/>
-	<package name="vulkan-tools"/>
+	<package name="vlc"/>
 	<package name="wine"/>
 	<package name="winetricks"/>
 	<package name="lutris"/>
+	<package name="gamemode"/>
+	<package name="gamescope"/>
+	<package name="gimp"/>
+	<package name="git"/>
+	<package name="docker"/>
+	<package name="kdenlive"/>
+	<package name="bottles"/>
+	<package name="qbittorrent"/>
+	</packages>
+	<packages type="image" profiles="Game-Nova">
+	<package name="kdenlive"/>
+	<package name="bottles"/>
+	<package name="qbittorrent"/>
+	<package name="gimp"/>
+	<package name="vlc"/>
+	<package name="wine"/>
+	<package name="winetricks"/>
+	<package name="lutris"/>
+	<package name="gamemode"/>
+	<package name="gamescope"/>
+	<package name="steam"/>
+	<package name="mangohud"/>
+	<package name="obs-studio"/>
+	<package name="pdfarranger"/>
+	<namedCollection name="libreoffice"/>
+	</packages>
+
+
+	<packages type="image" profiles="Dev-Nova">
+	<namedCollection name="development-tools"/>
+	<namedCollection name="libreoffice"/>
+	<package name="neovim"/>
+	<package name="code"/>
+	<package name="obs-studio"/>
+	<package name="pdfarranger"/>
+	<package name="gcc-c++"/>
+	<package name="cmake"/>
+	<package name="make"/>
+	<package name="ninja-build"/>
+	<package name="pkgconf-pkg-config"/>
+	<package name="podman"/>
+	<package name="podman-compose"/>
+	<package name="buildah"/>
+	<package name="skopeo"/>
+	<package name="python3-pip"/>
+	<package name="vlc"/>
+	<package name="gimp"/>
+	<package name="git"/>
+	<package name="python3-devel"/>
+	<package name="nodejs"/>
+	<package name="npm"/>
+	<package name="rust"/>
+	<package name="cargo"/>
+	<package name="docker"/>
+	<package name="qbittorrent"/>
 	</packages>
 </image>
